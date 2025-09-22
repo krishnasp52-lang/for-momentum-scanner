@@ -8,14 +8,14 @@ from streamlit_autorefresh import st_autorefresh
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Auto-refresh every 5 minutes
-st_autorefresh(interval=300000, key="datarefresh")
+st_autorefresh(interval=60000, key="datarefresh")
 
 fno_stocks_sector = {
     "RELIANCE.NS":"OIL","INFY.NS":"IT","TCS.NS":"IT","HDFCBANK.NS":"BANKING",
     "ICICIBANK.NS":"BANKING","SBIN.NS":"BANKING","LT.NS":"AUTO","ITC.NS":"CONSUMER",
     "AXISBANK.NS":"BANKING","KOTAKBANK.NS":"BANKING","HCLTECH.NS":"IT",
     "BHARTIARTL.NS":"TELECOM","BAJAJ-AUTO.NS":"AUTO","MARUTI.NS":"AUTO","ONGC.NS":"OIL"
+    # Add remaining F&O stocks as needed
 }
 
 PRICE_BREAKOUT_DAYS = 2
@@ -89,5 +89,6 @@ for s, price, sz, score, pc, sector in shorts:
 
 st.subheader("Sector-wise Heatmap of % Price Change from Open")
 fig, ax = plt.subplots(figsize=(16,8))
+import seaborn as sns
 sns.heatmap(heatmap_df, annot=True, fmt=".2f", cmap="RdYlGn", center=0, linewidths=0.5, linecolor="gray")
 st.pyplot(fig)
